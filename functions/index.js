@@ -28,6 +28,13 @@ var janaResponses = [
 'Nächsten Sonntag steht $vorname ganz im Mittelpunkt!'
 ];
 
+var joergResponses = [
+'$vorname macht was ganz Tolles!',
+'$vorname? Tja, heute dies morgen das.',
+'Am 13. Februar ist für $vorname ein ganz besonderer Tag!',
+'Happy brithday to you soon, lieber $vorname.'
+];
+
 var defaultResponses = [
 'Muss!',
 '$vorname geht es gut!',
@@ -40,7 +47,27 @@ function getResponse(responseArray, name) {
   return rand.replace("$vorname", name);
 }
 
-app.intent('Wie geht es', (conv,{vorname}) => {
+//app.intent('Wie geht es', (conv,{vorname}) => {
+//	switch (vorname.toLowerCase()) {
+//		case 'jona':
+//		  conv.ask(getResponse(jonaResponses,vorname))
+//		  break;
+//		case 'johann':
+//		  conv.ask(getResponse(johannResponses,vorname))
+//		  break;
+//		case 'jana':
+//		  conv.close(getResponse(janaResponses,vorname))
+//		  break;
+//		case 'jörg':
+//		  conv.close(getResponse(joergResponses,vorname))
+//		  break;  
+//		default:
+//		  conv.close(getResponse(defaultResponses,vorname))
+//		  //conv.close(defaultResponses[0])
+//	}
+//})
+
+app.intent('Was macht', (conv,{vorname}) => {
 	switch (vorname.toLowerCase()) {
 		case 'jona':
 		  conv.ask(getResponse(jonaResponses,vorname))
@@ -51,6 +78,9 @@ app.intent('Wie geht es', (conv,{vorname}) => {
 		case 'jana':
 		  conv.close(getResponse(janaResponses,vorname))
 		  break;
+		case 'jörg':
+		  conv.close(getResponse(joergResponses,vorname))
+		  break;  
 		default:
 		  conv.close(getResponse(defaultResponses,vorname))
 		  //conv.close(defaultResponses[0])
@@ -62,8 +92,8 @@ app.intent('Teste alle Antworten', (conv) => {
 //	for (index = 0; index < jonaResponses.length; ++index) {
 //	    conv.ask(jonaResponses[index].replace("$vorname", "Max"));
 //	}
-    allResponses=[jonaResponses,johannResponses,janaResponses,defaultResponses]
-    conv.close(allResponses.join('.').split("$vorname").join("Max"));
+    allResponses=[jonaResponses,johannResponses,janaResponses,joergResponses,defaultResponses]
+    conv.close(allResponses.join('.').split("$vorname").join("Max Mustermann"));
     //close will end the assistant
 })
 
